@@ -1,77 +1,88 @@
-# React + TypeScript + Vite
+# ☕ Sip Happens Café — Віджет відгуків
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проєкт **Sip Happens Café** — це інтерактивний додаток для збору та аналізу відгуків відвідувачів кафе, створений за допомогою **React**, **TypeScript** та **Vite**.
 
-Currently, two official plugins are available:
+Додаток дозволяє збирати відгуки за трьома категоріями: **Добре (Good)**, **Нейтрально (Neutral)** та **Погано (Bad)**, автоматично рахує загальну кількість голосів і відсоток позитивних відгуків, а також підтримує можливість скидання статистики.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Основний функціонал
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Збір відгуків:** Три кнопки для вибору типу оцінки (Good, Neutral, Bad).
+- **Аналіз статистики:** Динамічний підрахунок:
+  - Кількості кожного виду відгуку.
+  - Загальної кількості відгуків (**Total**).
+  - Відсотка позитивних відгуків (**Positive**).
+- **Умовне відображення:**
+  - Якщо відгуків ще немає, показується повідомлення: *"No feedback yet"*.
+  - Коли з'являється хоча б один відгук, відображається детальна статистика та кнопка скидання.
+- **Скидання результатів (Reset):** Кнопка очищення статистики, яка відображається лише за наявності голосів.
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Технологічний стек
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Бібліотека:** [React](https://react.dev/)
+- **Мова програмування:** [TypeScript](https://www.typescriptlang.org/)
+- **Складальник (Bundler):** [Vite](https://vite.dev/)
+- **Стилізація:** CSS Modules (модульний CSS) для ізоляції стилів компонентів.
+- **Нормалізація стилів:** `modern-normalize`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Структура компонентів
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Додаток має модульну структуру компонентів, розташованих у папці `src/components/`:
 
+1. **`App`** (`App.tsx`) — Головний компонент додатку. Зберігає стан відгуків (`votes`), містить функції для голосування й скидання, а також обчислює загальну статистику.
+2. **`CafeInfo`** (`CafeInfo.tsx`) — Відображає заголовок кафе та інструкцію для користувача.
+3. **`VoteOptions`** (`VoteOptions.tsx`) — Містить кнопки для вибору відгуку та кнопку скидання (`Reset`).
+4. **`VoteStats`** (`VoteStats.tsx`) — Відображає результати голосування (кількість по кожній категорії, загальну кількість та відсоток позитивних відгуків).
+5. **`Notification`** (`Notification.tsx`) — Інформаційне повідомлення, що показується за відсутності голосів.
+6. **`types`** (`types/votes.ts`) — Визначення TypeScript типів (`Votes`, `VoteType`).
+
+---
+
+## 💻 Інструкція із запуску
+
+### 1. Встановлення залежностей
+
+Переконайтеся, що на вашому комп'ютері встановлено Node.js. Виконайте команду в терміналі для встановлення всіх необхідних пакетів:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Запуск у режимі розробки
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Запустіть локальний сервер розробки:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+```
 
+Після запуску відкрийте посилання, вказане в терміналі (зазвичай `http://localhost:5173`).
+
+### 3. Збірка проєкту для продакшну
+
+Для створення оптимізованої версії додатку для розміщення на хостингу виконайте:
+
+```bash
+npm run build
+```
+
+### 4. Попередній перегляд збірки
+
+Перевірити зібраний проєкт локально перед деплоєм можна за допомогою:
+
+```bash
+npm run preview
+```
+
+### 5. Лінтування коду
+
+Для перевірки коду на відповідність стандартам і відсутність помилок:
+
+```bash
+npm run lint
 ```
