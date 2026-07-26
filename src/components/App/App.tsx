@@ -7,7 +7,7 @@ import VoteOptions from "../VoteOptions/VoteOptions.tsx";
 import VoteStats from "../VoteStats/VoteStats.tsx";
 import Notification from "../Notification/Notification.tsx";
 
-import type { Votes, VoteType } from "../types/votes.ts";
+import type { Votes, VoteType } from "../../types/votes";
 
 const initialVotes: Votes = {
   good: 0,
