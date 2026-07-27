@@ -7,5 +7,10 @@ export default defineConfig({
   plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
   build: {
     sourcemap: true,
+    // 1. Вимикає мініфікацію JS та CSS
+    // minify: false, 
+    
+    // 2. Встановлює цільовий синтаксис на найсучасніший (ES-модулі)
+    // target: 'esnext', 
   },
 });
